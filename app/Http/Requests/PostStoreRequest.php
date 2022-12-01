@@ -24,10 +24,10 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'tytul' => 'required',
-            'autor' => 'required',
-            'email' => 'required|email:rfc,dns|min:5',
-            'tresc' => 'required|min:5'
+            'tytul' => 'required|min:3|max:200',
+            'autor' => 'required|min:3|max:100',
+            'email' => 'required|email:rfc,dns|min:5|max:200',
+            'tresc' => 'required|min:5|max:256'
         ];
     }
 }

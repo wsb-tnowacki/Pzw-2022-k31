@@ -48,7 +48,7 @@ use App\Http\Controllers\PostController;
 Route::controller(KontrolerStart::class)->group(function(){
     Route::get('/','start')->name('start');
     Route::get('/kontakt','kontakt')->name('kontakt');
-    Route::get('/onas','onas')->name('onas');
+    //Route::get('/onas','onas')->name('onas')->middleware('auth');
     Route::get('/onas','onas')->name('onas');
     Route::get('/kontakt/{id}/test/{info}','kontakt_id');
 });
@@ -65,3 +65,7 @@ Route::post('/posty/dodaj', function () {
 }); */
 
 Route::resource('posty', PostController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,6 +12,9 @@
         <th scope="col">Tytul</th>
         <th scope="col">Autor</th>
         <th scope="col">Data utworzenia</th>
+        @auth
+        <th scope="col">Akcja</th>  
+        @endauth
       </tr>
     </thead>
     <tbody>
@@ -24,7 +27,19 @@
         <td><a href="{{ route('posty.show', $post->id) }}"> {{ $post->tytul }} </a></td>
         <td>{{ $post->autor }}</td>
         <td>{{ date('j F Y', strtotime($post->created_at)) }}</td>
-      </tr>
+        @auth
+        <td>
+          <form class="form-inline" method="POST" action="{{ route('posty.destroy', $post->id) }}" >
+            @csrf
+            @method('DELETE')
+          <a href="{{ route('posty.edit', $post->id) }}">
+            <button class="btn btn-success m-1" type="button">E</button>
+          </a>
+          <button type="submit" class="btn btn-danger m-1">U</button>
+          </form>
+        </td>     
+        @endauth
+        </tr>
   @endforeach
     </tbody>
   </table>
