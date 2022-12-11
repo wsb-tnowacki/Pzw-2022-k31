@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
         <label for="autor">Autor</label>
-        <input type="text" class="form-control" id="autor" disabled="disabled" value="{{ $post->autor }}"  name="autor">
+        <input type="text" class="form-control" id="autor" disabled="disabled" value="{{ $post->user->name }}"  name="autor">
     </div>
     <div class="form-group">
         <label for="email">Email</label>

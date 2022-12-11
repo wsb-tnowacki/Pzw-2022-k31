@@ -21,4 +21,9 @@ class Posty extends Model
         'email',
         'tresc',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('email',200);
             $table->text('tresc');
             $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            //relacja jeden do wielu pola posty.user_id z users.id
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

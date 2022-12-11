@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Posty;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -20,7 +21,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posty = Posty::all();
+        //$posty = Posty::all();
+        $posty = Posty::with('user')->paginate(5);
         return view('posty.index', compact('posty'));
     }
 
@@ -70,6 +72,7 @@ class PostController extends Controller
         $posty->autor = request('autor');
         $posty->email = request('email');
         $posty->tresc = request('tresc');
+        $posty->user_id = Auth::user()->id;
         $posty->save(); //$posty->create();
         return redirect()->route('posty.index')->with('message', 'Dodano poprawnie post');
     }
@@ -82,7 +85,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Posty::findOrFail($id);
+        $post = Posty::with('user')->findOrFail($id);
         return view('posty.post', compact('post'));
     }
 
